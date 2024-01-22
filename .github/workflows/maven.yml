@@ -1,0 +1,43 @@
+name: ☕ Java CI with Maven 🛠️
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  generate-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ☕ Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🚀 Set up JDK 17
+        uses: actions/setup-java@v3
+
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: 👷 Build with Maven
+        run: mvn clean install
+
+      - name: 💻 Generate code
+        run: |
+          ABS_JAR_PATH=$(find codegen/target -name "codegen-1.0.0.jar" | head -n1)
+          java -jar ${ABS_JAR_PATH}
+
+      - name: 📦 Commit generated code
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add is-even/src/main/java/pl/nwse/iseven/IsEven.java
+          git commit -m "feat: generate `IsEven` class"
+
+      - name: 🔼 Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: master
