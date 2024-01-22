@@ -27,6 +27,7 @@ jobs:
 
       - name: 💻 Generate code
         run: |
+          export JAVA_OPTS="-Xmx24G"
           ABS_JAR_PATH=$(find codegen/target -name "codegen-1.0.0.jar" | head -n1)
           java -jar ${ABS_JAR_PATH}
 
