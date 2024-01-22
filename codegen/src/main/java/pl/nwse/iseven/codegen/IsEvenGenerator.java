@@ -20,7 +20,7 @@ public final class IsEvenGenerator {
         .addParameter(TypeName.INT, "number")
         .returns(TypeName.BOOLEAN);
 
-    for (int current = 0; current < 1_000_001; current++) {
+    for (int current = 0; current < 1_000_000_001; current++) {
       isEvenMethodBuilder.beginControlFlow("if (number == $L)", current)
           .addStatement("return $L", current % 2 == 0)
           .endControlFlow();
