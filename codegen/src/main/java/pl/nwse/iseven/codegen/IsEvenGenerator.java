@@ -6,7 +6,6 @@ import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.LinkedList;
 import javax.lang.model.element.Modifier;
 
 public final class IsEvenGenerator {
@@ -21,7 +20,7 @@ public final class IsEvenGenerator {
         .addParameter(TypeName.INT, "number")
         .returns(TypeName.BOOLEAN);
 
-    for (int current = 0; current < 10_000_001; current++) {
+    for (int current = 0; current < 1_000_001; current++) {
       isEvenMethodBuilder.beginControlFlow("if (number == $L)", current)
           .addStatement("return $L", current % 2 == 0)
           .endControlFlow();
