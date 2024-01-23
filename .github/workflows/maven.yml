@@ -27,7 +27,7 @@ jobs:
 
       - name: 💻 Generate code
         run: |
-          export JAVA_OPTS="-Xmx24G"
+          export JAVA_OPTS="-Xmx7G"
           ABS_JAR_PATH=$(find codegen/target -name "codegen-1.0.0.jar" | head -n1)
           java -jar ${ABS_JAR_PATH}
 
@@ -36,7 +36,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add is-even/src/main/java/pl/nwse/iseven/IsEven.java
-          git commit -m "feat: generate `IsEven` class"
+          git commit -m "feat: generate IsEven class"
 
       - name: 🔼 Push changes
         uses: ad-m/github-push-action@master
